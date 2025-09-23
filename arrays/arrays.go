@@ -1,4 +1,4 @@
-package valores
+package main
 
 import "fmt"
 
@@ -10,6 +10,10 @@ func Arrays() {
 	fmt.Println(novoArray)
 	fmt.Println(len(novoArray))
 	fmt.Println(cap(novoArray))
+}
+
+func main() {
+	Arrays()
 }
 
 /*
