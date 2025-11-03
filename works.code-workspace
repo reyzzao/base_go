@@ -1,0 +1,18 @@
+{
+  // My Works Vscode : by Profile Default
+  "folders": [
+    {
+      "path": ".",
+      "name": "PRINCIPAL"
+    },
+    {
+      "path": "/home/rzj/dotfiles/",
+      "name": "DOTFILES"
+    },
+  ],
+  "settings": {
+    "cSpell.words": [
+      "cervejinha",
+    ]
+  }
+}

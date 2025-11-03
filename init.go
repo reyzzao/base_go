@@ -1,8 +1,7 @@
 package main
 
+import "fmt"
 
-main() {
-	fmt.Println('Ola init')
+func main() {
+	fmt.Println("Ola init")
 }
-
-// /home/rzj/www/base_go/init.go
