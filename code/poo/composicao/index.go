@@ -57,6 +57,9 @@ func FazerBarulho(a IAnimal) {
 }
 
 func main() {
+
+	/* Usando_Instancias_Filhos : */
+	// instanciando preenchendo valores
 	gato1 := Gato{
 		Animal: Animal{Nome: "gato1", Idade: 10},
 		Cor:    "Marron",
@@ -67,7 +70,8 @@ func main() {
 		Cor:    "Dourado",
 	}
 
-	// visual
+	// Usando Instancias_Filhas_Ja_Instanciadas
 	FazerBarulho(gato1)     // usando o metodo vindo de interface na intancia, passando a infancia
 	FazerBarulho(cachorro1) // usando o metodo vindo de interface na intancia, passando a infancia
+
 }
