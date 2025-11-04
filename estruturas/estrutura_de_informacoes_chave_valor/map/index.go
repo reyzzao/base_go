@@ -3,8 +3,8 @@ package main
 import "fmt"
 
 var mapa = map[string]string{
-	"acao": "dia que já é",
-	"oque": "tarde",
+	"acao":  "dia que já é",
+	"oque":  "tarde",
 	"acao2": "que nao tem mais",
 	"oque2": "jeito",
 	"acao3": "mas eu não aceito a",
@@ -14,5 +14,10 @@ var mapa = map[string]string{
 }
 
 func main() {
-	fmt.Println(mapa)
+
+	// fmt.Println(mapa)
+
+	// acessar props // em go só por posicao passada como string de aspas duplas.
+	fmt.Println(mapa["acao2"])
+	
 }
