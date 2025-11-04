@@ -3,14 +3,15 @@ package main
 import "fmt"
 
 /*
-Fluxo Composicao de Entidade
-1. Passo: 1, Estrutura_Pai, via: struct, exemplo: Animal
-2. Passo: 2, Estruturas_Filhas, via: struct, exemplo: Gato & Cachorro
-3. Passo: 3, Polimorfismo_Contrato_de_Acoes_Herdados_do_Pai, via: interface, exemplo: IAnimal { EmitirSom() }
-4. Passo: 4, Polimorfismo_Funcoes_Construtoras_Fa, via: funcao, exemplo: FazerBarulho_FnConstrutora , sera usada quando quiser dar comportamento as Instancias_Filhas
-5. Passo: 5, Polimorfismo: Metodo_dos_TiposFilhos_que_Implementam_o_Contrato_de_Acoes_Herdados_do_Pai
-6. Passo: 6, Usar_Instanciar e popular os TiposFilhos
-7. Passo: 7, usar Metodos_Construtores_da_Interface,  argumentando a instancia do TiposFilhos que desejar.
+### Fluxo Composicao de Entidade
+1. Passo: 1, Estrutura_Pai, via: struct, Essencia: TODOS FILHOS SERÃO UM/A, exemplo: struct Animal
+2. Passo: 2, Estruturas_Filhas, via: struct, Essencia: SOU O QUE MEU PAI É, exemplo: structs Gato & Cachorro
+3. Passo: 3, Polimorfismo_Contrato_de_Acoes_Herdados_do_Pai, via: interface, Essencia: Nas minhas props/metodos digo que MEUS FILHOS PODERAO FAZER, exemplo: IAnimal { EmitirSom() }
+4. Passo: 4, Polimorfismo_Funcoes_Construtoras_Fa, via: funcao, Essencia: SOU FILHO MEU DISSE QUE POSSO FAZER , exemplo: FazerBarulho_Metodos_Construtores_da_Interface , sera usada quando quiser dar comportamento as Instancias_Filhas
+5. Passo: 5, Polimorfismo: Metodo_dos_TiposFilhos_que_Implementam_o_Contrato_de_Acoes_Herdados_do_Pai, Essencia: DE ACORDO COM MEU PAI DISSE PQUE POSSO FAZER ENTÃO FAREI DE QUE FORMA e do meu jeito? diferente dos meus irmão dentro.,Exemplo: metodo EmitirSom() gato miará na dela , já cachorro vai latir no dele.
+6. Passo: 6, Usar_Instanciar e popular os TiposFilhos, Essencia: usando o metodo vindo de interface na intancia, passando a instancia,Exemplo: `gato1 := Gato{ Animal: Animal{Nome: "gato1", Idade: 10}, Cor:    "Marron",}`
+7. Passo: 7, usar Metodos_Construtores_da_Interface,  argumentando a instancia do TiposFilhos que desejar. Essencia: ,Exemplo: FazerBarulho_Metodos_Construtores_da_Interface(cachorro1)
+
 */
 
 // -------------------------------------------------------------
@@ -83,7 +84,7 @@ func main() {
 		- Uso: Esta será a funcao que poderão usar nas instancias, não desencadeando mas sim chamando a função e passando a instancia.
 
 	*/
-	FazerBarulho_Metodos_Construtores_da_Interface(gato1)     // usando o metodo vindo de interface na intancia, passando a infancia
-	FazerBarulho_Metodos_Construtores_da_Interface(cachorro1) // usando o metodo vindo de interface na intancia, passando a infancia
+	FazerBarulho_Metodos_Construtores_da_Interface(gato1)     // usando o metodo vindo de interface na intancia, passando a instancia
+	FazerBarulho_Metodos_Construtores_da_Interface(cachorro1) // usando o metodo vindo de interface na intancia, passando a instancia
 
 }
