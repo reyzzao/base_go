@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>base_animal: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github/code/poo/composicao/base_animal/index.go (0.0%)</option>
+				
+				<option value="file1">github/code/poo/composicao/veiculo/index.go (0.0%)</option>
+				
+				<option value="file2">github/estruturas/colecoes/arrays/index.go (0.0%)</option>
+				
+				<option value="file3">github/estruturas/estrutura_de_informacoes_chave_valor/map/index.go (0.0%)</option>
+				
+				<option value="file4">github/ferramenta_operadores_incrementais/index.go (0.0%)</option>
+				
+				<option value="file5">github/ferramenta_repeticoes/for_para_cada/01_mudar_valor_variavel_simples/index.go (0.0%)</option>
+				
+				<option value="file6">github/ferramenta_repeticoes/for_para_cada/02_mudar_valor_variavel_moderno/index.go (0.0%)</option>
+				
+				<option value="file7">github/ferramenta_repeticoes/for_para_cada/03_for_range_iterar_em_agrupador_array/index.go (0.0%)</option>
+				
+				<option value="file8">github/init.go (0.0%)</option>
+				
+				<option value="file9">github/test_pro/index.go (0.0%)</option>
+				
+				<option value="file10">github/tipos/erro/index.go (0.0%)</option>
+				
+				<option value="file11">github/tipos/numeros/index.go (0.0%)</option>
+				
+				<option value="file12">github/tipos/texto/formatacao_texto/index.go (0.0%)</option>
+				
+				<option value="file13">github/tipos/texto/texto/index.go (0.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package main
+
+import "fmt"
+
+/*
+### Fluxo Composicao de Entidade
+1. Passo: 1, Estrutura_Pai, via: struct, Essencia: TODOS FILHOS SERÃO UM/A, exemplo: struct Animal
+2. Passo: 2, Estruturas_Filhas, via: struct, Essencia: SOU O QUE MEU PAI É, exemplo: structs Gato &amp; Cachorro
+3. Passo: 3, Polimorfismo_Contrato_de_Acoes_Herdados_do_Pai, via: interface, Essencia: Nas minhas props/metodos digo que MEUS FILHOS PODERAO FAZER, exemplo: IAnimal { EmitirSom() }
+4. Passo: 4, Polimorfismo_Funcoes_Construtoras_Fa, via: funcao, Essencia: SOU FILHO MEU DISSE QUE POSSO FAZER , exemplo: FazerBarulho_Metodos_Construtores_da_Interface , sera usada quando quiser dar comportamento as Instancias_Filhas
+5. Passo: 5, Polimorfismo: Metodo_dos_TiposFilhos_que_Implementam_o_Contrato_de_Acoes_Herdados_do_Pai, Essencia: DE ACORDO COM MEU PAI DISSE PQUE POSSO FAZER ENTÃO FAREI DE QUE FORMA e do meu jeito? diferente dos meus irmão dentro.,Exemplo: metodo EmitirSom() gato miará na dela , já cachorro vai latir no dele.
+6. Passo: 6, Usar_Instanciar e popular os TiposFilhos, Essencia: usando o metodo vindo de interface na intancia, passando a instancia,Exemplo: `gato1 := Gato{ Animal: Animal{Nome: "gato1", Idade: 10}, Cor:    "Marron",}`
+7. Passo: 7, usar Metodos_Construtores_da_Interface,  argumentando a instancia do TiposFilhos que desejar. Essencia: ,Exemplo: FazerBarulho_Metodos_Construtores_da_Interface(cachorro1)
+
+*/
+
+// -------------------------------------------------------------
+
+// Passo: 1, TipoPai , Perguntese: TODOS SERÃO UM
+type Animal struct {
+        Nome  string
+        Idade uint
+}
+
+// Passo: 2, Estrutura_TiposFilhos : perguntese: SÃO UM ou Serão gerados pelo Pai, exemplo: Cachorro, Gato que SÃO um Animal
+type Cachorro struct {
+        Animal        // composicao: insere o pai, perguntese: este Objeto é UM?
+        Cor    string // o que tera de diferente dos irmãos
+}
+
+// Passo: 2, Estrutura_TiposFilhos : perguntese: SÃO UM ou Serão gerados pelo Pai, exemplo: Cachorro, Gato que SÃO um Animal
+type Gato struct {
+        Animal        // composicao: insere o pai, perguntese: este Objeto é UM?
+        Cor    string // o que tera de diferente dos irmãos
+}
+
+/*
+ Passo: 3, Polimorfismo_Contrato_de_Acoes_Herdados_do_Pai :
+ Sera um contrato de Contrato_de_Acoes_Herdados_do_Pai que todos Filhos terão, o nome da acao sera o mmesmo para todos, só sera executada de forma diferente por cada.
+Palavra_Chave: `interface` : estrutura configuradora de acoes para estruturas
+passo: 1 do polimorfismo (definir a interface)
+*/
+
+type IAnimal interface {
+        // TODOS filhos poderam FAZER - Estes são Contrato_de_Acoes_Herdados_do_Pai
+        EmitirSom()
+}
+
+/*
+Passo: 4 , Metodos_Construtores_da_Interface
+via: FuncaoConstrutora que recebe o Pai e devolve : Contrato_de_Acoes_Herdados_do_Pai
+*/
+func FazerBarulho_Metodos_Construtores_da_Interface(a IAnimal) <span class="cov0" title="0">{
+        a.EmitirSom() // diz que o Pai deixou de heranca Contrato_de_Acoes_Herdados_do_Pai -então essa será AcaoDosFilhos_HerdadaDoPai
+}</span>
+
+/*
+Passo: 5, Metodo_dos_TiposFilhos_que_Implementam_o_Contrato_de_Acoes_Herdados_do_Pai
+*/
+func (g Gato) EmitirSom() <span class="cov0" title="0">{
+        fmt.Println("Miauuuuu")
+}</span>
+
+func (g Cachorro) EmitirSom() <span class="cov0" title="0">{
+        fmt.Println("Au..Au")
+}</span>
+
+func main() <span class="cov0" title="0">{
+
+        /* Passo: 6, Usar_Instanciar e popular os TiposFilhos */
+        gato1 := Gato{
+                Animal: Animal{Nome: "gato1", Idade: 10},
+                Cor:    "Marron",
+        }
+
+        cachorro1 := Cachorro{
+                Animal: Animal{Nome: "cachorro1", Idade: 8},
+                Cor:    "Dourado",
+        }
+
+        /*
+                Passo: 7, Usar os Metodos_Construtores_da_Interface
+                - passando as Instancias_Filhas
+                - Uso: Esta será a funcao que poderão usar nas instancias, não desencadeando mas sim chamando a função e passando a instancia.
+
+        */
+        FazerBarulho_Metodos_Construtores_da_Interface(gato1)     // usando o metodo vindo de interface na intancia, passando a instancia
+        FazerBarulho_Metodos_Construtores_da_Interface(cachorro1) // usando o metodo vindo de interface na intancia, passando a instancia
+
+}</span>
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package main
+
+import "fmt"
+
+type Veiculo interface {
+        buzina() string
+}
+
+type Carro struct {
+        Nome string
+        Ano  int
+        // Dono Pessoa // obs: nao pode fazer circulo viciador de composicao, Um tipo ter Um e este Um ter o tipo tambem.
+}
+
+func (c Carro) buzina() string <span class="cov0" title="0">{
+        return fmt.Sprintf("Ok buzineiiiii o meu Veiculo chamado &gt;&gt; %v", c.Nome)
+}</span>
+
+type Moto struct {
+        Nome string
+        Ano  int
+}
+
+func (m Moto) buzina() string <span class="cov0" title="0">{
+        return fmt.Sprintf("Ok buzineiiiii o meu Veiculo chamado &gt;&gt; %v", m.Nome)
+}</span>
+
+type Pessoa struct {
+        Nome   string
+        Compra Veiculo
+}
+
+func CreatePessoa(p Pessoa) *Pessoa <span class="cov0" title="0">{
+        return &amp;p
+}</span>
+
+func CreateCarro(v Carro) Carro <span class="cov0" title="0">{
+        return v
+}</span>
+func CreateMoto(v Moto) Moto <span class="cov0" title="0">{
+        return v
+}</span>
+
+var Carro1 = CreateCarro(Carro{Nome: "NomeCarro1", Ano: 2000})
+var Moto1 = CreateMoto(Moto{Nome: "NomeMoto1", Ano: 2000})
+
+var Pessoa1 = CreatePessoa(Pessoa{Nome: "Nome_Reinaldo", Compra: Carro1})
+var Pessoa2 = CreatePessoa(Pessoa{Nome: "Nome_Leo", Compra: Moto1})
+
+func main() <span class="cov0" title="0">{
+
+        // fmt.Println(Pessoa1)
+        // fmt.Println(Pessoa1.Veiculo.buzina())
+
+        // fmt.Println(Pessoa2)
+        // fmt.Println(Pessoa2.Veiculo.buzina())
+
+        fmt.Println(Pessoa2)
+        fmt.Println(Pessoa2.Compra.buzina())
+}</span>
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package main
+
+import "fmt"
+
+var arrayVazio = make([]string, 10)
+
+func Arrays() <span class="cov0" title="0">{
+        novoArray := append(arrayVazio, "Teste", "Teste2")
+        fmt.Println(arrayVazio)
+        fmt.Println(novoArray)
+        fmt.Println(len(novoArray))
+        fmt.Println(cap(novoArray))
+}</span>
+
+func main() <span class="cov0" title="0">{
+        Arrays()
+}</span>
+
+/*
+criar algum valor zerado: Usar: funcao make( tipo, tamanho, capacidade?)
+
+- adicionarItem no Array: usar funcao append( arrayAlvo, items... )
+- retorna tamanho do Array: usar funcao len( arrayAlvo )
+- retorna capacidade do Array: usar funcao cap( arrayAlvo )
+*/
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package main
+
+import "fmt"
+
+var mapa = map[string]string{
+        "acao":  "dia que já é",
+        "oque":  "tarde",
+        "acao2": "que nao tem mais",
+        "oque2": "jeito",
+        "acao3": "mas eu não aceito a",
+        "oque3": "decisao",
+        "acao4": "do teu coracao em",
+        "oque4": "partir",
+}
+
+func main() <span class="cov0" title="0">{
+
+        // fmt.Println(mapa)
+
+        // acessar props // em go só por posicao passada como string de aspas duplas.
+        fmt.Println(mapa["acao2"])
+        
+}</span>
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package main
+
+import "fmt"
+
+func main() <span class="cov0" title="0">{
+        // adicicao em 1 a cada execucao use na variavel ++ que é o mesmo que var = var + 1
+        adicionar_em_1 := 0
+        adicionar_em_1++
+        adicionar_em_1++
+        adicionar_em_1++
+        fmt.Println(adicionar_em_1)
+
+        adicionar_em_2 := 0
+        adicionar_em_2 += 2
+        adicionar_em_2 += 2
+        adicionar_em_2 += 2
+        fmt.Println(adicionar_em_2)
+
+}</span>
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package main
+
+import (
+        "fmt"
+        "time"
+)
+
+func main() <span class="cov0" title="0">{
+        // enquanto uma condição for verdadeira vou repetir o codigo
+        // o iteravel vem de fora do for e é modificado dentro do for
+
+        i := 0
+        for i &lt; 10 </span><span class="cov0" title="0">{
+                i++
+                fmt.Println(fmt.Sprintf("Incrementando i : %v", i))
+                time.Sleep(time.Second)
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package main
+
+import (
+        "fmt"
+        "time"
+)
+
+func main() <span class="cov0" title="0">{
+        // sintaxe: o iteravel , a condicao e a mudanca do iteravel sao definidas na declaracao do for
+        for i := 0; i &lt; 10; i += 2 </span><span class="cov0" title="0">{
+                fmt.Println(fmt.Sprintf("Incrementando i : %v", i))
+                time.Sleep(time.Second)
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package main
+
+import "fmt"
+
+// para iterar/percorrer ua estrutura, use a clausula/funcao range para percorrer a estrutura. e ter 2 vars para trabalhar
+var nomes = []string{"Reinaldo", "Guga", "Leonardo", "Gabriel"}
+
+var objetoPessoas = map[string]string{
+        "key1": "Programador",
+        "key2": "Sistemas",
+}
+
+func handleNomes() <span class="cov0" title="0">{
+        // sintaxe: for var_posicao, var_valor será := um range em var_array { aqui faço o que quiser nas vars capturadas var_posicao, var_valor }
+        for posicao, valor := range nomes </span><span class="cov0" title="0">{
+                fmt.Println(posicao, valor)
+        }</span>
+}
+
+// no caso de objeto map, as variaveis disponiveis para iterar/percorrer são a chave e valor
+func handlerObjetoPessoas() <span class="cov0" title="0">{
+        for key, value := range objetoPessoas </span><span class="cov0" title="0">{
+                fmt.Println(key, value)
+        }</span>
+}
+
+func main() <span class="cov0" title="0">{
+        // handleNomes()
+        handlerObjetoPessoas()
+
+}</span>
+</pre>
+		
+		<pre class="file" id="file8" style="display: none">package main
+
+import "fmt"
+
+func main() <span class="cov0" title="0">{
+        fmt.Println("Ola init")
+}</span>
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package test_pro
+
+func Soma(x, y int) int <span class="cov0" title="0">{
+        return x + y
+}</span>
+
+func Multiplicacao(x, y int) int <span class="cov0" title="0">{
+        return x * y
+}</span>
+
+</pre>
+		
+		<pre class="file" id="file10" style="display: none">package main
+
+import (
+        "errors"
+        "fmt"
+)
+
+// configurar a funcionalidade com tratamento:
+func dividirDoisNumeros(dividendo, divisor int) (int, error) <span class="cov0" title="0">{
+
+        if divisor == 0 </span><span class="cov0" title="0">{
+                return 0, errors.New("O divisor nao pode ser 0")
+                // tratar: é verificar/testar e devolver o tipo erro com seu valor zero e o feedback na instancia do erro.
+        }</span>
+
+        <span class="cov0" title="0">return dividendo / divisor, nil</span>
+        // devolucao: a operacao que dara o resultado favoravel, e o nulo para ser preenchido pelo tratamento da verificacao que colocara a instancia do erro passado acima.
+}
+
+// exemplo se caso nao tratasse
+func dividir_SemTratar(dividendo, divisor int) int <span class="cov0" title="0">{
+        return dividendo / divisor
+}</span>
+
+// usar a funcionalidade tratada
+func main() <span class="cov0" title="0">{
+        // verificar o que devolve de acerto e erro na funcionalidade e usa-los.
+        result, err := dividirDoisNumeros(10, 0)
+        if err != nil </span><span class="cov0" title="0">{
+                fmt.Println(result)
+        }</span>
+        <span class="cov0" title="0">fmt.Println(err.Error())</span>
+
+        // usar a funcionalidade sem tratamento.
+        // fmt.Println(dividir_SemTratar(10, 0)) // se dividir sem tratar da panic() e o programa é encerrado, o panic pode ser tratado com recorevy()
+}
+</pre>
+		
+		<pre class="file" id="file11" style="display: none">package main
+
+import "fmt"
+
+// inteiros
+var num_inteiro_any int = -170     // somente int deixa ser negativo
+var num_inteiro_positivo uint = 33 // uint : não deixa ser negativo
+
+// reais
+var num_real float64 = 33.334
+
+func main() <span class="cov0" title="0">{
+        fmt.Println(num_inteiro_any)
+        fmt.Println(num_real)
+        fmt.Println(num_inteiro_positivo)
+}</span>
+</pre>
+		
+		<pre class="file" id="file12" style="display: none">package main
+
+import "fmt"
+
+func main() <span class="cov0" title="0">{
+        var_numero_inteiro := 10
+        var_texto := "valor do meu texto"
+        var_logica := true
+
+        fmt.Println(
+                fmt.Sprintf("o valor da var_numero_inteiro é : %v \n", var_numero_inteiro),
+                fmt.Sprintf("o valor da var_texto é : %v \n", var_texto),
+                fmt.Sprintf("o valor da var_logica é : %v \n", var_logica),
+        )
+}</span>
+
+
+/*
+Obs: a formatacao é usada com a funcao fmt.Sprintf() que retorna o valor formatado.
+
+### Palavras Chave para usar nas Formatacoes:
+Formatacao qualquer tipo de valor/any  = %v
+
+Formatacoes_Especificas
+- formatacao string  = %s
+- formatacao numero inteiro  = %d
+- formatacao numero dizendo quantas casas decimais  = %.2f // diz que tera 2 casas decimais
+
+
+*/</pre>
+		
+		<pre class="file" id="file13" style="display: none">package main
+
+import "fmt"
+
+func main() <span class="cov0" title="0">{
+        meuTexto := "Sou meu texto"
+
+        primeiroCaractere := meuTexto[0] // retorna a posicao na tabela Asci do caractere
+        fmt.Println(primeiroCaractere)
+
+        fmt.Println(meuTexto) // textos somente dentro de aspas duplas em golang.
+        // var char = 'Oi' // erro: nao compila, Se adicionar dentro de aspas simples nem compila antigamente dava o numero da tabela Asci do caractere.
+
+        // fmt.Println(char)
+}</span>
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
